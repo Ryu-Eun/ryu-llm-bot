@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>일상 대화 챗봇</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .chat-container {
+            width: 100%;
+            max-width: 500px;
+            background: #ffffff;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .message.user {
+            background-color: #d1e7dd;
+            text-align: right;
+            color: #0f5132;
+        }
+
+        .message.bot {
+            background-color: #f8d7da;
+            text-align: left;
+            color: #842029;
+        }
+
+        .message strong {
+            display: block;
+            font-size: 0.9em;
+        }
+
+        .input-form {
+            margin-top: 20px;
+            display: flex;
+        }
+
+        .input-form input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border-radius: 20px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            margin-right: 10px;
+            outline: none;
+        }
+
+        .input-form button {
+            padding: 10px 20px;
+            border-radius: 20px;
+            border: none;
+            background-color: #0d6efd;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .input-form button:hover {
+            background-color: #0a58ca;
+        }
+
+        .message.user strong::before {
+            content: "👤";
+            margin-right: 5px;
+        }
+
+        .message.bot strong::before {
+            content: "🤖";
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        {% for message in messages %}
+            <div class="message {{ message.role }}">
+                <strong>{{ message.role | capitalize }}:</strong> {{ message.text }}
+            </div>
+        {% endfor %}
+    </div>
+
+    <form class="input-form" action="/" method="post">
+        <input
+            type="text"
+            name="user_input"
+            placeholder="채팅을 입력하세요 :"
+            required
+        />
+        <button type="submit">보내기</button>
+    </form>
+</body>
+</html>
